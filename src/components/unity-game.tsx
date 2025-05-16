@@ -6,8 +6,11 @@ import { useUnityStore } from "@/store/unity-store";
 declare global {
   interface Window {
     createUnityInstance?: any;
+    gameInstance?: any;
   }
 }
+const debug = process.env.NEXT_PUBLIC_DEBUG === "true";
+const email = process.env.NEXT_PUBLIC_EMAIL;
 
 export const UnityGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,6 +47,13 @@ export const UnityGame: React.FC = () => {
             .then((instance: any) => {
               setGameInstance(instance);
               // instance.SendMessage("Player", "SetInput", "True");
+              if (debug) {
+                window.gameInstance = instance;
+              }
+
+              if (email) {
+                instance.SendMessage("Analytics", "SetEmail", email);
+              }
             })
             .catch((error: Error) => {
               console.error("Unity initialization failed:", error);
