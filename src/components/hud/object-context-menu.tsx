@@ -19,13 +19,22 @@ export const ObjectContextMenu = () => {
     null
   );
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
+  const [lastPointerPosition, setLastPointerPosition] = useState({
+    x: 0,
+    y: 0,
+  });
   const pendingSetPositionItem = useRef<any>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handlePointerDown = useCallback(
     (e: PointerEvent) => {
+      const { clientX, clientY } = e;
+      console.log(e);
+      if (!menuRef.current?.contains(e.target as Node)) {
+        setLastPointerPosition({ x: clientX, y: clientY });
+      }
+
       if (!currentItem) {
-        const { clientX, clientY } = e;
         setClickPosition({ x: clientX, y: clientY });
       }
     },
@@ -61,6 +70,8 @@ export const ObjectContextMenu = () => {
           );
 
           if (hasValidMethods) {
+            setClickPosition(lastPointerPosition);
+
             setCurrentItem({
               gameObjectName: payload.gameObjectName,
               methods: payload.methods.filter((m: string) =>
@@ -82,7 +93,7 @@ export const ObjectContextMenu = () => {
       window.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("message", handleMessage);
     };
-  }, [gameInstance, currentItem, handlePointerDown]);
+  }, [gameInstance, currentItem, handlePointerDown, lastPointerPosition]);
 
   useEffect(() => {
     const handleCloseMenu = (e: MouseEvent | KeyboardEvent) => {
