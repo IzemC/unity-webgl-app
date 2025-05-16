@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 
 interface RotationControlButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  label: string;
+  label: React.ReactNode;
   dirKey: string;
   rotate: (key: string, pressed: boolean) => void;
 }

@@ -3,7 +3,7 @@ import React from "react";
 
 interface MoveControlButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  label: string;
+  label: React.ReactNode;
   dirKey: string;
   move: (key: string, pressed: boolean) => void;
 }
