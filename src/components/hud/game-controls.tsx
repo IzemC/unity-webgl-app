@@ -42,19 +42,35 @@ export const GameControls = () => {
             <MoveControlButton label="D" dirKey="d" move={move} />
           </div>
         </div>
-        <div className="flex items-end gap-4 sm:gap-10">
+        <div className="flex items-end gap-2 sm:gap-10">
+          {/* Charge Button */}
+          <div className="pointer-events-auto">
+            <MoveControlButton
+              label={
+                <div className="flex flex-col items-center justify-center">
+                  <div>Charge</div>
+                  <div className="hidden md:block text-xs">E</div>
+                </div>
+              }
+              dirKey="e"
+              move={move}
+              className="size-12 md:text-base bg-red-500/80"
+            />
+          </div>
           {/* Jump Button */}
           <div className="pointer-events-auto">
             <MoveControlButton
               label={
                 <div className="flex flex-col items-center justify-center">
                   <div>Jump</div>
-                  <div className="hidden sm:block text-xs">Space</div>
+                  <div className="hidden md:block md:text-sm text-xs">
+                    Space
+                  </div>
                 </div>
               }
               dirKey=" "
               move={move}
-              className="size-10 bg-green-500/80"
+              className="size-12 bg-green-500/80"
             />
           </div>
           {/* Rotation Controls */}
