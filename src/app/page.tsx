@@ -1,5 +1,7 @@
 import { UnityGame } from "@/components/unity-game";
 import { LoadingScreen } from "@/components/loading-screen";
+import { GameControls } from "@/components/hud/game-controls";
+import { HUDWrapper } from "@/components/hud/hud-wrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -18,6 +20,9 @@ export default function Home() {
         <div className="relative aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
           <UnityGame />
           <LoadingScreen />
+          <HUDWrapper className="absolute pointer-events-none z-10 bottom-0 left-0 w-full">
+            <GameControls />
+          </HUDWrapper>
         </div>
       </main>
     </>
