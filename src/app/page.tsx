@@ -1,4 +1,5 @@
 import { UnityGame } from "@/components/unity-game";
+import { LoadingScreen } from "@/components/loading-screen";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function Home() {
 
         <div className="relative aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
           <UnityGame />
+          <LoadingScreen />
         </div>
       </main>
     </>
